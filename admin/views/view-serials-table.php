@@ -4,6 +4,9 @@ require_once LDCL_PLUGIN_DIR . 'admin/views/view-edit-modal.php';
 require_once LDCL_PLUGIN_DIR . 'admin/views/view-delete-modal.php';
 require_once LDCL_PLUGIN_DIR . 'admin/views/view-barcode-modal.php';
 
+add_action('wp_ajax_export_serials_to_excel', 'ldcl_export_serials_to_excel');
+add_action('wp_ajax_nopriv_export_serials_to_excel', 'ldcl_export_serials_to_excel');
+
 // Include WordPress functions
 require_once ABSPATH . 'wp-load.php';
 ?>
@@ -12,6 +15,10 @@ require_once ABSPATH . 'wp-load.php';
 <hr>
 <a href="<?php echo admin_url('admin.php?page=ldcl-create-course-serial'); ?>"><button class="ldcl_btn"><i
             class="fa fa-graduation-cap"></i> Create Course Serial</button></a>
+&nbsp;
+<a href="#"><button class="ldcl_btn" id="exportSerialsBtn"><i class="fa fa-file-excel"></i> Export to Excel</button></a>
+
+
 <hr>
 <table id="serialsTable" class="widefat fixed" cellspacing="0">
     <thead>
@@ -87,6 +94,39 @@ require_once ABSPATH . 'wp-load.php';
     ?>
     </tbody>
 </table>
+
+<script>
+jQuery(document).ready(function($) {
+    $('#exportSerialsBtn').on('click', function(e) {
+        e.preventDefault();
+        var nonce = ldcl_admin.nonce;
+
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'export_serials_to_excel',
+                nonce: nonce
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(response) {
+                var blob = new Blob([response], {
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'serials_list.xlsx';
+                link.click();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error exporting serials:', error);
+            }
+        });
+    });
+});
+</script>
 
 
 <script>
@@ -193,6 +233,7 @@ require_once ABSPATH . 'wp-load.php';
     });
 })(jQuery);
 </script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

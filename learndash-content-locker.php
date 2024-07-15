@@ -12,11 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'LDCL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LDCL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+// Include Composer autoload file
 
 // Include necessary files.
 require_once LDCL_PLUGIN_DIR . 'includes/class-ldcl-serial.php';
 require_once LDCL_PLUGIN_DIR . 'admin/class-ldcl-admin.php';
 require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
+
 
 // Initialize the plugin.
 function ldcl_init() {
@@ -26,11 +28,24 @@ function ldcl_init() {
 
 register_activation_hook( __FILE__, 'ldcl_create_serials_table' );
 
+/**
+ * Creates the ldcl_serials table in the WordPress database.
+ * This table is used to store serial numbers for courses and lessons.
+ *
+ * @global wpdb $wpdb WordPress database object.
+ *
+ * @return void
+ */
 function ldcl_create_serials_table() {
     global $wpdb;
+
+    // Define the table name with the WordPress prefix
     $table_name = $wpdb->prefix . 'ldcl_serials';
+
+    // Get the character collation for the current database
     $charset_collate = $wpdb->get_charset_collate();
 
+    // SQL query to create the table
     $sql = "CREATE TABLE $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         serial_title varchar(255) NOT NULL,
@@ -43,10 +58,13 @@ function ldcl_create_serials_table() {
         PRIMARY KEY (id)
     ) $charset_collate;";
 
+    // Include the upgrade.php file to use dbDelta function
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+    // Execute the SQL query using dbDelta function
     dbDelta( $sql );
 
-    // Create serial input page
+    // Create the serial input page
     ldcl_create_serial_page();
 }
 
@@ -64,6 +82,8 @@ function ldcl_enqueue_scripts() {
     wp_enqueue_script('tablesorter-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js', array('jquery'), null, true);
     wp_enqueue_script('bwip-js', 'https://cdnjs.cloudflare.com/ajax/libs/bwip-js/3.1.0/bwip-js-min.js', array(), '3.1.0', true);
 
+
+
     wp_enqueue_script('ldcl-scripts', LDCL_PLUGIN_URL . 'public/js/ldcl-scripts.js', array('jquery'), '1.0', true);
 
 }
@@ -77,22 +97,33 @@ add_action('wp_enqueue_scripts', 'ldcl_enqueue_custom_styles');
 
 
 // Create a page for serial input
+/**
+ * Creates a page for serial input in WordPress.
+ * If the page does not exist, it creates a new page with the specified title, slug, and content.
+ *
+ * @return void
+ */
 function ldcl_create_serial_page() {
-    $page_title = 'أدخل كود الكورس';
+    $page_title = 'Enter Serial Code';
     $post_name = 'enter-serial-code';
     $page_content = '[ldcl_serial_form]';
 
-    $query = new WP_Query(array(
+    // Set up the query arguments for the WP_Query
+    $query_args = array(
         'post_type' => 'page',
         'title'     => $page_title,
         'name'       => $post_name,
         'post_status' => 'publish',
         'posts_per_page' => 1,
         'fields' => 'ids'
-    ));
+    );
 
+    // Perform the query to check if the page already exists
+    $query = new WP_Query($query_args);
+
+    // If no posts were found, create a new page
     if (!$query->have_posts()) {
-        $page = array(
+        $page_data = array(
             'post_type'    => 'page',
             'post_title'   => $page_title,
             'post_name'     => $post_name,
@@ -100,11 +131,22 @@ function ldcl_create_serial_page() {
             'post_status'  => 'publish',
             'post_author'  => 1,
         );
-        wp_insert_post($page);
+
+        // Insert the new page into the database
+        wp_insert_post($page_data);
     }
 }
 
 // Shortcode for serial input form
+/**
+ * Outputs the serial input form shortcode.
+ *
+ * This function generates a form for users to enter a serial code for accessing a course.
+ * The form includes three input fields for the serial code parts and a submit button.
+ * It also includes JavaScript to automatically move focus to the next input field when the current one reaches its maximum length.
+ *
+ * @return string The HTML markup for the serial input form.
+ */
 function ldcl_serial_form_shortcode() {
     ob_start();
     ?>
@@ -114,7 +156,7 @@ function ldcl_serial_form_shortcode() {
         <?php echo esc_html($_GET['ldcl_message']); ?>
     </div>
     <?php endif; ?>
-    <h5>أدخل الكود المكون من 12 رقم/حرف</h5>
+    <h5>Enter The 12 Chars Serial</h5>
     <div>
         <input type="text" placeholder="xxxx" name="ldcl_serial_part1" id="ldcl_serial_part1" maxlength="4" required>
         <span>-</span>
@@ -122,7 +164,7 @@ function ldcl_serial_form_shortcode() {
         <span>-</span>
         <input type="text" placeholder="xxxx" name="ldcl_serial_part3" id="ldcl_serial_part3" maxlength="4" required>
     </div>
-    <button type="submit">تأكيد الكود</button>
+    <button type="submit">Confirm Serial</button>
     <?php wp_nonce_field('ldcl_save_settings', 'ldcl_settings_nonce'); ?>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -144,6 +186,16 @@ function ldcl_serial_form_shortcode() {
 add_shortcode('ldcl_serial_form', 'ldcl_serial_form_shortcode');
 
 // Handle serial form submission and grant access to the course
+/**
+ * Handles the submission of the serial form and grants access to the course.
+ *
+ * This function checks if the serial form data is submitted and validates the serial code.
+ * If the serial code is valid and not expired, it updates the serial usage in the database,
+ * grants access to the course, and redirects the user to the course page.
+ * If the serial code is invalid or expired, it redirects back to the form with an error message.
+ *
+ * @return void
+ */
 function ldcl_handle_serial_form_submission() {
     if (isset($_POST['ldcl_serial_part1']) && isset($_POST['ldcl_serial_part2']) && isset($_POST['ldcl_serial_part3'])) {
         global $wpdb;
@@ -202,11 +254,23 @@ function ldcl_handle_serial_form_submission() {
 
 add_action('template_redirect', 'ldcl_handle_serial_form_submission');
 
+/**
+ * Checks and updates the database table for the LearnDash Content Locker plugin.
+ * This function ensures that the 'used_date' column exists in the 'ldcl_serials' table.
+ * If the column does not exist, it adds the column with a default value of NULL.
+ *
+ * @global wpdb $wpdb WordPress database object.
+ *
+ * @return void
+ */
 function ldcl_update_db_check() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'ldcl_serials';
 
+    // Check if the 'used_date' column exists in the table
     $row = $wpdb->get_row("SHOW COLUMNS FROM $table_name LIKE 'used_date'");
+
+    // If the column does not exist, add it with a default value of NULL
     if (!$row) {
         $wpdb->query("ALTER TABLE $table_name ADD used_date datetime DEFAULT NULL");
     }

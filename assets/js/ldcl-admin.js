@@ -22,11 +22,25 @@ jQuery(document).ready(function ($) {
         $('#days_left').text(daysLeft + ' days left');
     });
 });
-document.getElementById('generate_serial').addEventListener('click', function () {
+/**
+ * This function generates a random serial and updates the input field.
+ *
+ * @function
+ * @name generateRandomSerialAndUpdateInput
+ *
+ * @description
+ * The function generates a random serial using the Math.random() method,
+ * converts it to a base-36 string, and extracts a substring of length 9.
+ * The resulting serial is then converted to uppercase and assigned to the value
+ * of the input field with the id 'generated_serial'.
+ *
+ * @returns {void}
+ */
+function generateRandomSerialAndUpdateInput() {
     // Generate a random serial and update the input field
     var generatedSerial = Math.random().toString(36).substr(2, 9).toUpperCase();
     document.getElementById('generated_serial').value = generatedSerial;
-});
+}
 
 document.getElementById('copy_serial').addEventListener('click', function () {
     // Copy the generated serial to the clipboard
@@ -92,4 +106,32 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+jQuery(document).ready(function ($) {
+    $('#exportSerialsBtn').on('click', function (e) {
+        e.preventDefault();
+        var nonce = ldcl_admin.nonce;
+
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'export_serials_to_excel',
+                nonce: nonce
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (response) {
+                var blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'serials_list.xlsx';
+                link.click();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error exporting serials:', error);
+            }
+        });
+    });
+});
 
