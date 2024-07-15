@@ -66,6 +66,15 @@ public function add_admin_pages()
         'ldcl-create-course-serial', // Menu slug
         array($this, 'create_course_serial_page') // Function to call when rendering the page
     );
+
+    add_submenu_page(
+        'ldcl-serials', // Parent menu slug
+        'Buy Me Coffe !', // Page title
+        'Buy Me Coffe !', // Menu title
+        'manage_options', // Capability required
+        'ldcl-contribute', // Menu slug
+        array($this, 'contribute_page') // Function to call when rendering the page
+    );
 }
 
     public function enqueue_admin_scripts()
@@ -261,6 +270,11 @@ function ldcl_update_serial_data() {
     {
         $courses = $this->get_courses();
         include LDCL_PLUGIN_DIR . 'admin/views/view-create-serial-course.php';
+    }
+
+    public function contribute_page()
+    {
+        include LDCL_PLUGIN_DIR . 'admin/views/view-contribute.php';
     }
 
 
