@@ -1,0 +1,192 @@
+/* Add your custom admin styles here */
+.ldcl-serials-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.courses_serial h2,
+.lessons_serial h2,
+.edit_ldcl {
+    text-align: center;
+}
+
+.courses_serial,
+.lessons_serial,
+.edit_ldcl {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.courses_serial label,
+.lessons_serial label,
+.edit_ldcl label {
+    margin-top: 10px;
+}
+
+.lessons_serial input[type="text"],
+.lessons_serial input[type="date"],
+.lessons_serial select,
+.courses_serial input[type="text"],
+.courses_serial input[type="date"],
+.courses_serial select,
+.edit_ldcl input[type="text"],
+.edit_ldcl input[type="date"],
+.edit_ldcl select {
+    width: 80%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#generate_serial,
+#copy_serial,
+.ldcl_btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0084c2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+#cancel_btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #a80008;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+
+}
+
+.courses_serial button,
+.lessons_serial button,
+.edit_ldcl button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+
+}
+
+/* CSS for the tooltip */
+.tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: #0f7e00;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    opacity: 0.8;
+    z-index: 9999;
+}
+
+
+.danger_tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: #8b0000;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    opacity: 0.8;
+    z-index: 9999;
+}
+
+
+#days_left {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.alert-danger {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+#barcodeModal .modal-dialog {
+    max-width: 350px;
+}
+
+#barcodeModal .modal-body {
+    text-align: center;
+}
+
+#barcodeCanvas {
+    max-width: 300px;
+    margin: 0 auto;
+    /* Center the canvas horizontally */
+}
+
+.modal-buttons {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /* Adjust as needed */
+}
+
+
+#downloadBarcodeBtn {
+    padding: 7px;
+    border-radius: 7px;
+    background-color: dodgerblue;
+    color: white;
+}
+
+#copySerialTextBtn {
+    padding: 7px;
+    border-radius: 7px;
+    background-color: green;
+    color: white;
+}
+
+.custombtn {
+    border: none;
+    background-color: transparent;
+    background: none;
+}
+
+.edit-serial-btn {
+    color: dodgerblue;
+}
+
+.edit-serial-btn:hover {
+    color: deepskyblue;
+}
+
+.delete-serial-btn {
+    color: darkred
+}
+
+.delete-serial-btn:hover {
+    color: red;
+}
+
+.copy-serial-btn {
+    color: green;
+}
+
+.copy-serial-btn:hover {
+    color: yellowgreen
+}
+
+.barcode-serial-btn:hover {
+    color: darkslategrey;
+}

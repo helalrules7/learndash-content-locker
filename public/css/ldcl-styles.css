@@ -1,0 +1,57 @@
+.ldcl-message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.ldcl-message.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+/* Custom styles for the serial input form */
+#ldcl-serial-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+#ldcl-serial-form div {
+    display: flex;
+    align-items: center;
+}
+
+#ldcl-serial-form input[type="text"] {
+    width: 80px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+#ldcl-serial-form span {
+    font-size: 18px;
+    color: #333;
+}
+
+#ldcl-serial-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #04a1eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#ldcl-serial-form button:hover {
+    background-color: #0081c2;
+}
