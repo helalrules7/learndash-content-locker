@@ -102,14 +102,27 @@ add_action( 'admin_enqueue_scripts', 'ldcl_enqueue_scripts' );
 add_action( 'plugins_loaded', 'ldcl_init' );
 
 function ldcl_enqueue_custom_styles() {
-    wp_enqueue_style('ldcl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-styles.css');
+    wp_enqueue_style('ldcl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-styles.css', array(), '1.0.0');
     if (is_rtl()) {
-        wp_enqueue_style('ldcl-rtl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-rtl.css', array('ldcl-styles'));
-        wp_enqueue_style('ldcl-admin-rtl', LDCL_PLUGIN_URL . 'public/css/admin-rtl.css', array('ldcl-styles', 'ldcl-rtl-styles'));
+        wp_enqueue_style('ldcl-rtl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-rtl.css', array('ldcl-styles'), '1.0.0');
     }
 }
-add_action('admin_enqueue_scripts', 'ldcl_enqueue_custom_styles');
+add_action('wp_enqueue_scripts', 'ldcl_enqueue_custom_styles');
 
+function ldcl_enqueue_admin_styles() {
+    wp_enqueue_style('ldcl-admin-styles', LDCL_PLUGIN_URL . 'public/css/admin-styles.css', array(), '1.0.0');
+    if (is_rtl()) {
+        wp_enqueue_style('ldcl-admin-rtl-styles', LDCL_PLUGIN_URL . 'public/css/admin-rtl.css', array('ldcl-admin-styles'), '1.0.0');
+    }
+}
+add_action('admin_enqueue_scripts', 'ldcl_enqueue_admin_styles');
+
+function ldcl_force_enqueue_styles() {
+    if (has_shortcode(get_post()->post_content, 'ldcl_serial_form')) {
+        ldcl_enqueue_custom_styles();
+    }
+}
+add_action('wp_enqueue_scripts', 'ldcl_force_enqueue_styles', 999);
 
 function ldcl_force_admin_rtl($classes) {
     if (is_rtl() && isset($_GET['page']) && strpos($_GET['page'], 'ldcl-') === 0) {
@@ -276,34 +289,41 @@ function ldcl_create_serial_page() {
 function ldcl_serial_form_shortcode() {
     ob_start();
     ?>
-<form method="post" id="ldcl-serial-form" dir="rtl" style="direction:rtl" dir="rtl">
-    <?php if (isset($_GET['ldcl_message'])): ?>
-    <div class="ldcl-message <?php echo esc_attr($_GET['ldcl_message_type']); ?>">
-        <?php echo esc_html($_GET['ldcl_message']); ?>
+<form method="post" id="ldcl-serial-form" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>"
+    style="direction:<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
+    <?php
+        if (isset($_GET['ldcl_message']) && isset($_GET['ldcl_message_type'])) {
+            $message = urldecode($_GET['ldcl_message']);
+            $message_type = $_GET['ldcl_message_type'];
+            ?>
+    <div class="ldcl-message <?php echo esc_attr($message_type); ?>">
+        <?php echo esc_html($message); ?>
     </div>
-    <?php endif; ?>
+    <?php
+        }
+        ?>
     <h5><?php _e('Enter the 8 characters serial number', 'learndash-content-locker'); ?></h5>
-    <div dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>" style="direction:<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
+    <div>
         <input type="text" placeholder="xxxx" name="ldcl_serial_part1" id="ldcl_serial_part1" maxlength="4" required>
         <span>-</span>
         <input type="text" placeholder="xxxx" name="ldcl_serial_part2" id="ldcl_serial_part2" maxlength="4" required>
     </div>
     <button type="submit"><?php _e('Confirm Serial Number', 'learndash-content-locker'); ?></button>
     <?php wp_nonce_field('ldcl_save_settings', 'ldcl_settings_nonce'); ?>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputs = document.querySelectorAll('#ldcl-serial-form input[type="text"]');
+</form>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('#ldcl-serial-form input[type="text"]');
 
-        inputs.forEach((input, index) => {
-            input.addEventListener('input', (event) => {
-                if (input.value.length === 4 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            });
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', (event) => {
+            if (input.value.length === 4 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
         });
     });
-    </script>
-</form>
+});
+</script>
 <?php
     return ob_get_clean();
 }
@@ -356,11 +376,11 @@ function ldcl_handle_serial_form_submission() {
                 wp_redirect(get_permalink($serial->course_or_lesson_id));
                 exit;
             } else {
-                $message = _e('Serial number is outdated', 'learndash-content-locker');
+                $message = __('Serial number is outdated', 'learndash-content-locker');
                 $message_type = 'error';
             }
         } else {
-            $message = _e('Invalid or already used serial code', 'learndash-content-locker');
+            $message = __('Invalid or already used serial code', 'learndash-content-locker');
             $message_type = 'error';
         }
 

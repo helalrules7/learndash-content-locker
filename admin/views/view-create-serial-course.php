@@ -4,7 +4,12 @@ require_once LDCL_PLUGIN_DIR . 'admin/class-ldcl-admin.php';
 require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
 ?>
 <div class="wrap ldcl-admin-page">
-
+    <?php if ( isset( $_GET['success'] ) ) : ?>
+    <div class="notice notice-success">
+        <p><?php _e('New serial code created successfully!', 'learndash-content-locker'); ?></p>
+    </div>
+    <?php endif; ?>
+    <hr>
     <div style="display: flex; align-items: center;">
         <a href="admin.php?page=ldcl-serials" style="text-decoration: none; color: dodgerblue; margin: 0;">
             <h2 style="color:dodgerblue"><?php _e('LearnDash Serial Locker', 'learndash-content-locker'); ?></h2>
@@ -13,12 +18,9 @@ require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
         <h2 style="margin: 0 0 0 5px;"><?php _e('Create a new serial code', 'learndash-content-locker'); ?></h2>
     </div>
     <hr>
-    <?php if ( isset( $_GET['success'] ) ) : ?>
-    <div class="notice notice-success">
-        <p><?php _e('New serial code created successfully!', 'learndash-content-locker'); ?></p>
-    </div>
-    <?php endif; ?>
+
     <form method="post" class="courses_serial" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+
         <?php wp_nonce_field( 'ldcl_save_course_serial', 'ldcl_course_serial_nonce' ); ?>
         <input type="hidden" name="action" value="ldcl_save_course_serial">
 

@@ -14,6 +14,9 @@ public function __construct()
     // Add admin menu page
     add_action('admin_menu', array($this, 'add_admin_pages'));
 
+    add_action('wp_ajax_get_delete_nonce', array($this, 'get_delete_nonce'));
+
+
     // Enqueue admin scripts and styles
     add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
 
@@ -34,7 +37,7 @@ public function __construct()
 
     // Delete serial via AJAX
     add_action('wp_ajax_ldcl_delete_serial', array($this, 'ldcl_delete_serial_callback'));
-
+    
     // Export serials to Excel via AJAX
     add_action('wp_ajax_export_serials_to_excel', array($this, 'ldcl_export_serials_to_excel'));
 }
@@ -79,6 +82,11 @@ public function add_admin_pages()
     );
 }
 
+
+public function get_delete_nonce() {
+    $nonce = wp_create_nonce('ldcl_delete_serial_nonce');
+    wp_send_json_success(array('nonce' => $nonce));
+}
 /**
      * Enqueues admin scripts and styles.
      *
@@ -102,6 +110,49 @@ public function add_admin_pages()
 
     public function enqueue_admin_scripts()
     {
+        //Barcode Modal
+        wp_enqueue_script('ldcl-barcode-modal', LDCL_PLUGIN_URL . 'public/js/barcode-modal.js', array('jquery'), '1.0', true);
+        wp_localize_script('ldcl-barcode-modal', 'ldclTranslations', array(
+            'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker')
+        ));
+
+        // Delete Modal and functionality
+            $nonce = wp_create_nonce('ldcl_delete_serial_nonce');
+        
+            wp_enqueue_script('ldcl-delete-serial', LDCL_PLUGIN_URL . 'public/js/delete-serial.js', array('jquery'), time(), true);
+            wp_localize_script('ldcl-delete-serial', 'ldclAjax', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'nonce' => $nonce
+            ));
+
+
+        //Export To excel
+        wp_enqueue_script('ldcl-export-serials', LDCL_PLUGIN_URL . 'public/js/export-serials.js', array('jquery'), '1.0', true);
+        wp_localize_script('ldcl-export-serials', 'ldcl_admin', array(
+            'nonce' => wp_create_nonce('export_serials_nonce')
+        ));
+
+        //Barcode Generator
+        wp_enqueue_script('ldcl-barcode-generator', LDCL_PLUGIN_URL . 'public/js/barcode-generator.js', array('jquery'), '1.0', true);
+        wp_localize_script('ldcl-barcode-generator', 'ldclAjax', array(
+            'ajaxurl' => admin_url('admin-ajax.php')
+        ));
+
+
+        //Copy serial to clipboard
+        wp_enqueue_script('ldcl-copy-serial', LDCL_PLUGIN_URL . 'public/js/copy-serial.js', array('jquery'), '1.0', true);
+        wp_localize_script('ldcl-copy-serial', 'ldclTranslations', array(
+            'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker')
+        ));
+        
+
+        //Edit Modal and functionality
+        wp_enqueue_script('ldcl-edit-serial', LDCL_PLUGIN_URL . 'public/js/edit-serial.js', array('jquery'), '1.0', true);
+        wp_localize_script('ldcl-edit-serial', 'ldclAjax', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('ldcl_update_serial_nonce')
+        ));
+    
         wp_enqueue_style('ldcl-admin-css', LDCL_PLUGIN_URL . 'assets/css/ldcl-admin.css');
         wp_enqueue_script('ldcl-admin-js', LDCL_PLUGIN_URL . 'assets/js/ldcl-admin.js', array('jquery'), null, true);
         // Localize the script with new data
@@ -229,41 +280,45 @@ public function ldcl_export_serials_to_excel() {
  *
  * @return void
  */
-function ldcl_delete_serial_callback() {
-    global $wpdb;
+public function ldcl_delete_serial_callback() {
     
-    // Check nonce for security
-    check_ajax_referer('ldcl_delete_serial_nonce', 'nonce');
+    
+    $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
+    
+    $expected_nonce = wp_create_nonce('ldcl_delete_serial_nonce');
+    
+    $nonce_valid = wp_verify_nonce($nonce, 'ldcl_delete_serial_nonce');
+    
+    if (!$nonce_valid) {
+        wp_send_json_error(array('message' => 'Invalid nonce'));
+        return;
+    }
     
     $serial_id = isset($_POST['serial_id']) ? intval($_POST['serial_id']) : 0;
     
-    // Get the serial details
+    global $wpdb;
     $table_name = $wpdb->prefix . 'ldcl_serials';
     $serial = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $serial_id));
     
     if ($serial) {
-        // Remove user access to the course
         $course_id = $serial->course_or_lesson_id;
         $user_id = $serial->used_by_user_id;
         
         if ($user_id && $course_id) {
-            // Remove the user from the course
             ld_update_course_access($user_id, $course_id, false);
-            
-            // Delete user meta related to course access
             delete_user_meta($user_id, 'course_' . $course_id . '_access_from');
         }
         
-        // Delete the serial from the database
-        $wpdb->delete($table_name, array('id' => $serial_id));
+        $result = $wpdb->delete($table_name, array('id' => $serial_id));
         
-        // Return a response (optional)
-        wp_send_json_success('Serial deleted successfully and user access revoked');
+        if ($result !== false) {
+            wp_send_json_success(array('message' => __('Serial deleted successfully and user access revoked', 'learndash-content-locker')));
+        } else {
+            wp_send_json_error(array('message' => __('Failed to delete serial', 'learndash-content-locker')));
+        }
     } else {
-        wp_send_json_error('Serial not found');
+        wp_send_json_error(array('message' => __('Serial not found', 'learndash-content-locker')));
     }
-    
-    wp_die();
 }
 
 
@@ -279,6 +334,9 @@ function ldcl_delete_serial_callback() {
  * @return void
  */
 function ldcl_update_serial_data() {
+
+    check_ajax_referer('ldcl_update_serial_nonce', 'nonce');
+
     // Check if required parameters are set
     if (!isset($_POST['serial_id'], $_POST['serial_title'], $_POST['validity_date'])) {
         wp_send_json_error(array('message' => 'Missing parameters'));
@@ -369,7 +427,6 @@ public function handle_course_serial_form_submission()
         // Check the result of the insert query
         if (!$insert_result) {
             // Log any errors that occurred during the insert query
-            error_log('Error inserting course serial: ' . $wpdb->last_error);
         }
 
         // Redirect to the create course serial page with a success message
@@ -407,7 +464,6 @@ public function get_courses()
         }
         wp_reset_postdata();
     } else {
-        error_log('No LearnDash courses found.');
     }
 
     return $course_list;
