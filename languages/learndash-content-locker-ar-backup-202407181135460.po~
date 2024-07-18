@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LearnDash Content Locker\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-18 09:36+0000\n"
-"PO-Revision-Date: 2024-07-18 11:35+0000\n"
+"PO-Revision-Date: 2024-07-18 09:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: العربية\n"
 "Language: ar\n"
@@ -158,6 +158,10 @@ msgstr "رقم متسلسل غير صحيح او مستخدم من قبل"
 msgid "Is Used?"
 msgstr "تم إستخدامه؟"
 
+#: admin/views/view-create-serial-course.php:10
+msgid "Learn Dash Serial Locker"
+msgstr "حماية محتوي Learndash برقم متسلسل"
+
 #. Name of the plugin
 msgid "LearnDash Content Locker"
 msgstr "حماية محتوي Learndash برقم متسلسل"
@@ -165,12 +169,6 @@ msgstr "حماية محتوي Learndash برقم متسلسل"
 #: admin/class-ldcl-admin.php:55 admin/class-ldcl-admin.php:56
 msgid "LearnDash Serial Codes"
 msgstr "الارقام المتسلسلة لـLearnDash "
-
-#: admin/views/view-create-serial-course.php:10
-#, fuzzy
-#| msgid "Learn Dash Serial Locker"
-msgid "LearnDash Serial Locker"
-msgstr "حماية محتوي Learndash برقم متسلسل"
 
 #. Description of the plugin
 msgid "Lock LearnDash courses with a serial number."
