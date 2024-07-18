@@ -11,6 +11,7 @@ The LearnDash Content Locker plugin allows administrators to manage serials for 
 - Export serial data to Excel.
 - Generate and download barcodes for serials.
 - RTL Ready | Arabic Translation already provided.
+- Ajax Search
 
 ## Installation
 
