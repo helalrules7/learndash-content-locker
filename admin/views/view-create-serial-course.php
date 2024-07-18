@@ -4,19 +4,14 @@ require_once LDCL_PLUGIN_DIR . 'admin/class-ldcl-admin.php';
 require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
 ?>
 <div class="wrap ldcl-admin-page">
+    <div>
+        <h2 style="margin: 0 0 0 5px;"><?php _e('Create a new serial code', 'learndash-content-locker'); ?></h2>
+    </div>
     <?php if ( isset( $_GET['success'] ) ) : ?>
     <div class="notice notice-success">
         <p><?php _e('New serial code created successfully!', 'learndash-content-locker'); ?></p>
     </div>
     <?php endif; ?>
-    <hr>
-    <div style="display: flex; align-items: center;">
-        <a href="admin.php?page=ldcl-serials" style="text-decoration: none; color: dodgerblue; margin: 0;">
-            <h2 style="color:dodgerblue"><?php _e('LearnDash Serial Locker', 'learndash-content-locker'); ?></h2>
-        </a>
-        &nbsp;»
-        <h2 style="margin: 0 0 0 5px;"><?php _e('Create a new serial code', 'learndash-content-locker'); ?></h2>
-    </div>
     <hr>
 
     <form method="post" class="courses_serial" action="<?php echo admin_url( 'admin-post.php' ); ?>">

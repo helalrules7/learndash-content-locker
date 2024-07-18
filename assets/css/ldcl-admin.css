@@ -199,3 +199,7 @@
 .modal-header .close {
     float: left;
 }
+
+a.ldcl-btn {
+    text-decoration: none;
+}

@@ -13,9 +13,11 @@ require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
             <a href="https://buymeacoffee.com/ahmedhelal" target="_blank" class="ldcl-btn ldcl-btn-bmc">
                 <i class="fa fa-coffee"></i> <?php _e(' Buy Me a Coffee', 'learndash-content-locker'); ?>
             </a>
+            <br> <br>
             <a href="https://ahmedhelal.dev" target="_blank" class="ldcl-btn ldcl-btn-website">
                 <i class="fa fa-globe"> <?php _e(' Visit My Website', 'learndash-content-locker'); ?></i>
             </a>
+            <br> <br>
             <a href="https://github.com/helalrules" target="_blank" class="ldcl-btn ldcl-btn-github">
                 <i class="fa fa-git"></i> <?php _e(' GitHub', 'learndash-content-locker'); ?>
             </a>

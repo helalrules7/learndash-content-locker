@@ -1,276 +1,292 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LearnDash Content Locker\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 09:36+0000\n"
-"PO-Revision-Date: 2024-07-18 11:35+0000\n"
+"POT-Creation-Date: 2024-07-18 14:50+0300\n"
+"PO-Revision-Date: 2024-07-18 15:01+0300\n"
 "Last-Translator: \n"
-"Language-Team: العربية\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
-"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
+"Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.6; wp-6.6\n"
-"X-Domain: learndash-content-locker"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: learndash-content-locker.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/views/view-contribute.php:14
-msgid " Buy Me a Coffee"
-msgstr "ساعدني علي الإنتشار"
+#: admin/class-ldcl-admin.php:58 admin/class-ldcl-admin.php:59
+msgid "LearnDash Serial Codes"
+msgstr "أرقام متسلسلة LearnDash"
 
-#: admin/views/view-serials-table.php:26
-msgid " Export to excel"
-msgstr "حفظ ملف Excel"
-
-#: admin/views/view-contribute.php:20
-msgid " GitHub"
-msgstr "GitHub"
-
-#: admin/views/view-contribute.php:17
-msgid " Visit My Website"
-msgstr "قم بزيارة موقعي"
-
-#. Author of the plugin
-msgid ""
-"<a href=\"https://ahmedhelal.dev\">Ahmed Helal</a> | <a href=\"https:"
-"//buymeacoffee.com/ahmedhelal\">Buy Me Coffee!</a>"
-msgstr ""
-"<a href=\"https://ahmedhelal.dev\">Ahmed Helal</a> | <a href=\"https:"
-"//buymeacoffee.com/ahmedhelal\">Buy Me Coffee!</a>"
-
-#: admin/views/view-delete-modal.php:26
-msgid "? <br> This will also delete the user access to the serial"
-msgstr "؟ هذه الخطوة ستقوم بإلغاء امكانية وصول المستخدم للكورس أيضا"
-
-#: admin/views/view-delete-modal.php:24
-msgid "Are you sure you want to delete serial "
-msgstr "هل أنت متأكد من حذف الرقم المتسلسل "
-
-#: admin/class-ldcl-admin.php:145
-msgid "Associated Course"
-msgstr "الكورس المرتبط"
-
-#: admin/views/view-serials-table.php:91
-msgid "Barcode"
-msgstr "باركود"
-
-#: admin/views/view-delete-modal.php:32
-msgid "Cancel"
-msgstr "إلغاء"
-
-#: admin/views/view-create-serial-course.php:35
-msgid "Clipboard copy"
-msgstr "نسخ للمحفظة"
-
-#: admin/class-ldcl-admin.php:143
-msgid "Code"
-msgstr "رقم متسلسل"
-
-#: admin/class-ldcl-admin.php:144
-msgid "Code Title"
-msgstr "عنوان الرقم"
-
-#: admin/views/view-delete-modal.php:30
-msgid "Confirm"
-msgstr "تأكيد"
-
-#: learndash-content-locker.php:291
-msgid "Confirm Serial Number"
-msgstr "تأكيد الرقم المتسلسل"
-
-#: admin/views/view-serials-table.php:86
-msgid "Copy"
-msgstr "نسخ"
-
-#: admin/views/view-barcode-modal.php:30
-msgid "Copy to clipboard"
-msgstr "نسخ للمحفظة"
-
-#: admin/views/view-serials-table.php:35
-msgid "Course"
-msgstr "الكورس"
-
-#: admin/views/view-create-serial-course.php:13
-msgid "Create a new serial code"
-msgstr "إنشاء رقم متسلسل جديد"
-
-#. Parent menu slug
-#: admin/class-ldcl-admin.php:65 admin/class-ldcl-admin.php:66
+#: admin/class-ldcl-admin.php:68 admin/class-ldcl-admin.php:69
 #: admin/views/view-serials-table.php:23
 msgid "Create New Serial"
 msgstr "إنشاء رقم متسلسل جديد"
 
-#: admin/views/view-serials-table.php:39
-msgid "Created"
-msgstr "تاريخ الإنشاء"
+#: admin/class-ldcl-admin.php:77 admin/class-ldcl-admin.php:78
+msgid "Support the developer!"
+msgstr "ساعد المطور!"
 
-#: admin/class-ldcl-admin.php:149
+#: admin/class-ldcl-admin.php:116 admin/class-ldcl-admin.php:145
+msgid "Serial copied to clipboard!"
+msgstr "تم نسخ الرقم المتسلسل للحافظة!"
+
+#: admin/class-ldcl-admin.php:194
+msgid "Code"
+msgstr "الرقم المتسلسل"
+
+#: admin/class-ldcl-admin.php:195
+msgid "Code Title"
+msgstr "العنوان"
+
+#: admin/class-ldcl-admin.php:196
+msgid "Associated Course"
+msgstr "الكورس المرتبط"
+
+#: admin/class-ldcl-admin.php:197 admin/views/view-serials-table.php:41
+msgid "Validity"
+msgstr "الصلاحية"
+
+#: admin/class-ldcl-admin.php:198
+msgid "Used"
+msgstr "تم إستخدامه"
+
+#: admin/class-ldcl-admin.php:199
+msgid "User"
+msgstr "المستخدم"
+
+#: admin/class-ldcl-admin.php:200
 msgid "Creation Date"
 msgstr "تاريخ الإنشاء"
 
-#: admin/views/view-serials-table.php:81
-msgid "Delete"
-msgstr "حذف"
+#: admin/class-ldcl-admin.php:315
+msgid "Serial deleted successfully and user access revoked"
+msgstr ""
+"تم حذف الرقم المتسلسل بنجاح ، وإزالة صلاحية الوصول للمستخدم للكورس المرتبط"
 
-#: admin/views/view-delete-modal.php:14
-msgid "Delete Serial"
-msgstr "حذف الرقم المتسلسل"
+#: admin/class-ldcl-admin.php:317
+msgid "Failed to delete serial"
+msgstr "فشل في حذف الرقم المتسلسل"
 
-#: admin/views/view-barcode-modal.php:28
-msgid "Download barcode"
-msgstr "حفظ الباركود"
+#: admin/class-ldcl-admin.php:320
+msgid "Serial not found"
+msgstr "الرقم المتسلسل غير موجود"
 
-#: admin/views/view-serials-table.php:76
-msgid "Edit"
-msgstr "تعديل"
-
-#: admin/views/view-edit-modal.php:13
-msgid "Edit Serial"
-msgstr "تعديل الرقم المتسلسل"
-
-#: learndash-content-locker.php:233
-msgid "Enter Serial Code"
-msgstr "أدخل الرقم المتسلسل"
-
-#: learndash-content-locker.php:285
-msgid "Enter the 8 characters serial number"
-msgstr "أدخل الرقم المتسلسل المكون من 8 حروف/أرقام"
-
-#: admin/views/view-create-serial-course.php:33
-msgid "Generate Code"
-msgstr "إنشاء رقم"
-
-#: admin/views/view-serials-table.php:19
-msgid "Generated Serials"
-msgstr "الأرقام المتسلسلة المسجلة"
-
-#: admin/views/view-contribute.php:10
-msgid "If you find this plugin helpful, please consider supporting me:"
-msgstr "إن كانت هذه الاضافة ساعدتك بشكل ما ، قد ترغب فى مساعدتي علي الإنتشار"
-
-#: learndash-content-locker.php:363
-msgid "Invalid or already used serial code"
-msgstr "رقم متسلسل غير صحيح او مستخدم من قبل"
-
-#: admin/views/view-serials-table.php:37
-msgid "Is Used?"
-msgstr "تم إستخدامه؟"
-
-#. Name of the plugin
-msgid "LearnDash Content Locker"
-msgstr "حماية محتوي Learndash برقم متسلسل"
-
-#: admin/class-ldcl-admin.php:55 admin/class-ldcl-admin.php:56
-msgid "LearnDash Serial Codes"
-msgstr "الارقام المتسلسلة لـLearnDash "
-
-#: admin/views/view-create-serial-course.php:10
-#, fuzzy
-#| msgid "Learn Dash Serial Locker"
-msgid "LearnDash Serial Locker"
-msgstr "حماية محتوي Learndash برقم متسلسل"
-
-#. Description of the plugin
-msgid "Lock LearnDash courses with a serial number."
-msgstr "حماية محتوي LearnDash برقم متسلسل."
-
-#: admin/views/view-create-serial-course.php:18
-msgid "New serial code created successfully!"
-msgstr "تم إنشاء الرقم المتسلسل بنجاح!"
-
-#: admin/views/view-create-serial-course.php:47
-msgid "No Courses found"
-msgstr "لم نجد كورسات مسجلة"
-
-#: admin/views/view-serials-table.php:102
-msgid "No serials found"
-msgstr "لا توجد ارقام متسلسلة مسجلة"
-
-#: admin/views/view-edit-modal.php:36 admin/views/view-edit-modal.php:42
-msgid "Related Course"
-msgstr "الكورس المرتبط"
-
-#: admin/views/view-create-serial-course.php:39
-msgid "Related Course:"
-msgstr "الكورس المرتبط:"
-
-#: admin/views/view-create-serial-course.php:58
-msgid "Save Code"
-msgstr "حفظ الرقم المتسلسل"
-
-#: admin/views/view-create-serial-course.php:41
-msgid "Select Course"
-msgstr "إختار الكورس المرتبط"
-
-#: admin/views/view-edit-modal.php:27 admin/views/view-serials-table.php:33
-msgid "Serial"
-msgstr "الرقم المتسلسل"
-
-#: admin/views/view-barcode-modal.php:15
+#: admin/views/view-barcode-modal.php:11
 msgid "Serial Barcode"
 msgstr "باركود الرقم المتسلسل"
 
-#: admin/views/view-create-serial-course.php:28
-msgid "Serial Code"
-msgstr "الرقم المتسلسل"
-
-#: admin/views/view-create-serial-course.php:25
-msgid "Serial Code Title"
-msgstr "عنوان الرقم"
-
-#: admin/views/view-barcode-modal.php:7
-msgid "Serial copied to clipboard!"
-msgstr "تم النسخ بنجاح للمحفظة!"
-
-#: learndash-content-locker.php:359
-msgid "Serial number is outdated"
-msgstr "صلاحية الرقم المتسلسل منتهية"
-
-#: admin/views/view-edit-modal.php:22
-msgid "Serial Title"
-msgstr "عنوان الرقم المتسلسل"
+#: admin/views/view-barcode-modal.php:23
+msgid "Download barcode"
+msgstr "حفظ الباركود"
 
 #: admin/views/view-contribute.php:9
 msgid "Support the developer"
 msgstr "ساعد المطور"
 
-#. Parent menu slug
-#: admin/class-ldcl-admin.php:74 admin/class-ldcl-admin.php:75
-msgid "Support the developer!"
-msgstr "ساعد المطور!"
+#: admin/views/view-contribute.php:10
+msgid "If you find this plugin helpful, please consider supporting me:"
+msgstr "لو كانت هذه الإضافة قد قدمت لك مساعدة ، فقد ترغب في دعمي:"
 
-#: admin/views/view-serials-table.php:34
-msgid "Title"
-msgstr "عنوان"
+#: admin/views/view-contribute.php:14
+msgid " Buy Me a Coffee"
+msgstr " قدم لي قهوة"
 
-#: admin/views/view-edit-modal.php:47
+#: admin/views/view-contribute.php:17
+msgid " Visit My Website"
+msgstr " قم بزيارة موقعي"
+
+#: admin/views/view-contribute.php:20
+msgid " GitHub"
+msgstr " GitHub"
+
+#: admin/views/view-create-serial-course.php:9
+msgid "New serial code created successfully!"
+msgstr "تم إنشاء رقم متسلسل جديد بنجاح!"
+
+#: admin/views/view-create-serial-course.php:15
+msgid "LearnDash Serial Locker"
+msgstr "أرقام متسلسلة لـ LearnDash"
+
+#: admin/views/view-create-serial-course.php:18
+msgid "Create a new serial code"
+msgstr "إنشاء رقم متسلسل جديد"
+
+#: admin/views/view-create-serial-course.php:27
+msgid "Serial Code Title"
+msgstr "عنوان الرقم المتسلسل"
+
+#: admin/views/view-create-serial-course.php:29
+#: admin/views/view-edit-modal.php:25
+msgid "Use username or phone for easy search"
+msgstr "إستخدم إسم المستخدم او رقم التليفون لتسهيل عملية البحث"
+
+#: admin/views/view-create-serial-course.php:30
+msgid "Serial Code"
+msgstr "الرقم المتسلسل"
+
+#: admin/views/view-create-serial-course.php:35
+msgid "Generate Code"
+msgstr "إنشاء رقم متسلسل"
+
+#: admin/views/view-create-serial-course.php:37
+msgid "Clipboard copy"
+msgstr "نسخ للحافظة"
+
+#: admin/views/view-create-serial-course.php:41
+msgid "Related Course:"
+msgstr "الكورس المرتبط:"
+
+#: admin/views/view-create-serial-course.php:43
+msgid "Select Course"
+msgstr "قم بإختيار الكورس"
+
+#: admin/views/view-create-serial-course.php:49
+msgid "No Courses found"
+msgstr "لم نجد كورسات مسجلة"
+
+#: admin/views/view-create-serial-course.php:52
+#: admin/views/view-edit-modal.php:32
+msgid "Validity Date"
+msgstr "تاريخ الصلاحية"
+
+#: admin/views/view-create-serial-course.php:60
+msgid "Save Code"
+msgstr "حفظ الرقم المتسلسل"
+
+#: admin/views/view-delete-modal.php:14
+msgid "Delete Serial"
+msgstr "حذف الرقم المتسلسل"
+
+#: admin/views/view-delete-modal.php:24
+msgid "Are you sure you want to delete serial "
+msgstr "هل انت متأكد من إزالة الرقم المتسلسل "
+
+#: admin/views/view-delete-modal.php:26
+msgid "? <br> This will also delete the user access to the serial"
+msgstr "؟ <br> هذه الخطوة ستحذف أيضا إمكانية وصول المستخدم للكورس"
+
+#: admin/views/view-delete-modal.php:30
+msgid "Confirm"
+msgstr "تأكيد"
+
+#: admin/views/view-delete-modal.php:32
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: admin/views/view-edit-modal.php:14
+msgid "Edit Serial"
+msgstr "تعديل الرقم المتسلسل"
+
+#: admin/views/view-edit-modal.php:23
+msgid "Serial Title"
+msgstr "عنوان الرقم المتسلسل"
+
+#: admin/views/view-edit-modal.php:28 admin/views/view-serials-table.php:38
+msgid "Serial"
+msgstr "الرقم المتسلسل"
+
+#: admin/views/view-edit-modal.php:37 admin/views/view-edit-modal.php:43
+msgid "Related Course"
+msgstr "الكورس المرتبط"
+
+#: admin/views/view-edit-modal.php:48
 msgid "Update"
 msgstr "تحديث"
 
-#: admin/views/view-create-serial-course.php:27
-#: admin/views/view-edit-modal.php:24
-msgid "Use username or phone for easy search"
-msgstr "يفضل إستخدام رقم التليفون أو إسم المستخدم لتسهيل عملية البحث"
+#: admin/views/view-serials-table.php:19
+msgid "Generated Serials"
+msgstr "الأرقام المتسلسلة المسجلة"
 
-#: admin/class-ldcl-admin.php:147
-msgid "Used"
-msgstr "تم إستخدامه"
+#: admin/views/view-serials-table.php:26
+msgid " Export to excel"
+msgstr " حفظ لملف Excel"
 
-#: admin/class-ldcl-admin.php:148
-msgid "User"
-msgstr "المستخدم"
+#: admin/views/view-serials-table.php:32
+msgid "Search serials..."
+msgstr "بحث في الأرقام المتسلسلة..."
 
-#: admin/views/view-serials-table.php:38
+#: admin/views/view-serials-table.php:39
+msgid "Title"
+msgstr "عنوان"
+
+#: admin/views/view-serials-table.php:40
+msgid "Course"
+msgstr "الكورس"
+
+#: admin/views/view-serials-table.php:42
+msgid "Is Used?"
+msgstr "تم إستخدامه؟"
+
+#: admin/views/view-serials-table.php:43
 msgid "Username"
 msgstr "إسم المستخدم"
 
-#: admin/class-ldcl-admin.php:146 admin/views/view-serials-table.php:36
-msgid "Validity"
-msgstr "الصلاحية"
+#: admin/views/view-serials-table.php:44
+msgid "Created"
+msgstr "تاريخ الإنشاء"
 
-#: admin/views/view-create-serial-course.php:50
-#: admin/views/view-edit-modal.php:31
-msgid "Validity Date"
-msgstr "تاريخ الصلاحية"
+#: admin/views/view-serials-table.php:83
+msgid "Edit"
+msgstr "تعديل"
+
+#: admin/views/view-serials-table.php:88
+msgid "Delete"
+msgstr "حذف"
+
+#: admin/views/view-serials-table.php:93
+msgid "Copy"
+msgstr "نسخ"
+
+#: admin/views/view-serials-table.php:98
+msgid "Barcode"
+msgstr "باركود"
+
+#: admin/views/view-serials-table.php:109
+msgid "No serials found"
+msgstr "لم نجد ارقام متسلسلة مسجلة"
+
+#: learndash-content-locker.php:246
+msgid "Enter Serial Code"
+msgstr "أدخل الرقم المتسلسل"
+
+#: learndash-content-locker.php:305
+msgid "Enter the 8 characters serial number"
+msgstr "أدخل الرقم المتسلسل المكون من 8 حروف"
+
+#: learndash-content-locker.php:311
+msgid "Confirm Serial Number"
+msgstr "تأكيد الرقم"
+
+#: learndash-content-locker.php:379
+msgid "Serial number is outdated"
+msgstr "انتهت صلاحية هذا الرقم ، يرجي التواصل مع الإدارة"
+
+#: learndash-content-locker.php:383
+msgid "Invalid or already used serial code"
+msgstr ""
+"<strong>الرقم المتسلسل غير صحيح</strong><br>تأكد من الرقم المدخل أو تواصل "
+"مع الإدارة"
+
+#. Plugin Name of the plugin/theme
+msgid "LearnDash Content Locker"
+msgstr "أرقام متسلسلة لـ LearnDash"
+
+#. Description of the plugin/theme
+msgid "Lock LearnDash courses with a serial number."
+msgstr "إغلاق محتوي كورسات LearnDash بواسطة أرقام متسلسلة."
+
+#. Author of the plugin/theme
+msgid ""
+"<a href=\"https://ahmedhelal.dev\">Ahmed Helal</a> | <a href=\"https://"
+"buymeacoffee.com/ahmedhelal\">Buy Me Coffee!</a>"
+msgstr ""
+"<a href=\"https://ahmedhelal.dev\">Ahmed Helal</a> | <a href=\"https://"
+"buymeacoffee.com/ahmedhelal\">ساعد المطور</a>"

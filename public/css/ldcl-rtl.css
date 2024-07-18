@@ -332,3 +332,37 @@ body.rtl.wp-admin .ldcl-admin-page form#ldcl-serial-form button {
 .modal-header .close {
     float: left;
 }
+
+a.ldcl-btn {
+    text-decoration: none;
+}
+
+.ldcl-btn-bmc {
+    background-color: #7d4533;
+    /* Buy Me a Coffee button color */
+}
+
+.ldcl-btn-website {
+    background-color: #007BFF;
+    /* Website button color */
+}
+
+.ldcl-btn-github {
+    background-color: #333;
+    /* GitHub button color */
+}
+
+.ldcl-btn i {
+    margin-right: 5px;
+}
+
+.ldcl-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: white !important;
+}
+
+.ldcl-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
