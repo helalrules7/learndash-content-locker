@@ -1,3 +1,136 @@
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+/* public/css/ldcl-rtl.css */
+body.ldcl-admin-page {
+    direction: rtl;
+    text-align: right;
+}
+
+.ldcl-admin-page .ldcl-message {
+    text-align: right;
+}
+
+body.rtl.wp-admin {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .ldcl-admin-page {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .ldcl-admin-page .ldcl-message {
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .ldcl-admin-page form#ldcl-serial-form {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .ldcl-admin-page form#ldcl-serial-form input[type="text"] {
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .ldcl-admin-page form#ldcl-serial-form button {
+    float: right !important;
+}
+
+/* Add more specific selectors for other elements as needed */
+
+.ldcl-admin-page form#ldcl-serial-form {
+    direction: rtl;
+    text-align: right;
+}
+
+.ldcl-admin-page form#ldcl-serial-form input[type="text"] {
+    text-align: right;
+}
+
+.ldcl-admin-page form#ldcl-serial-form button {
+    float: right;
+}
+
+
+.ldcl-message {
+    direction: rtl;
+    text-align: right;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.ldcl-message.error {
+    direction: rtl;
+    text-align: right;
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+/* Custom styles for the serial input form */
+#ldcl-serial-form {
+    direction: rtl;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+#ldcl-serial-form div {
+    direction: rtl;
+    text-align: right;
+    display: flex;
+    align-items: center;
+}
+
+#ldcl-serial-form input[type="text"] {
+    direction: rtl;
+    text-align: right;
+    width: 80px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+#ldcl-serial-form span {
+    direction: rtl;
+    text-align: right;
+    font-size: 18px;
+    color: #333;
+}
+
+#ldcl-serial-form button {
+    direction: rtl;
+    text-align: right;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #04a1eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#ldcl-serial-form button:hover {
+    direction: rtl;
+    text-align: right;
+    background-color: #0081c2;
+}
+
+
 /* Add your custom admin styles here */
 .ldcl-serials-container {
     max-width: 800px;

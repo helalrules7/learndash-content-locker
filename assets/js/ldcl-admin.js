@@ -5,9 +5,9 @@ jQuery(document).ready(function ($) {
     $('#generate_serial').click(function () {
         var serial = '';
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        for (var i = 0; i < 12; i++) {
+        for (var i = 0; i < 8; i++) {
             serial += chars.charAt(Math.floor(Math.random() * chars.length));
-            if ((i + 1) % 4 === 0 && i < 11) {
+            if ((i + 1) % 4 === 0 && i < 7) {
                 serial += '-';
             }
         }

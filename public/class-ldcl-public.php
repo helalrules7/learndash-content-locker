@@ -24,8 +24,8 @@ public function lock_page_shortcode() {
     ob_start();
     ?>
 <form id="ldcl-lock-form">
-    <input type="text" name="ldcl_serial" placeholder="xxxx-xxxx-xxxx" required>
-    <button type="submit">Unlock</button>
+    <input type="text" name="ldcl_serial" placeholder="xxxx-xxxx" required>
+    <button type="submit">تأكيد الكود</button>
 </form>
 <?php
     return ob_get_clean();

@@ -3,6 +3,9 @@
         "phpoffice/phpspreadsheet": "^2.1"
     },
     "config": {
-        "platform-check": false
+        "platform-check": false,
+        "platform": {
+            "php": "8.0.0"
+        }
     }
 }

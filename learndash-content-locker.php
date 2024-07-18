@@ -24,9 +24,24 @@ require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
 function ldcl_init() {
     $ldcl_admin = new LDCL_Admin();
     $ldcl_public = new LDCL_Public();
+
 }
 
 register_activation_hook( __FILE__, 'ldcl_create_serials_table' );
+
+/**
+ * Loads the plugin's textdomain for localization.
+ *
+ * This function loads the plugin's textdomain, allowing for translations of strings used in the plugin.
+ *
+ * @return void
+ */
+function ldcl_load_textdomain() {
+    load_plugin_textdomain('learndash-content-locker', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+add_action('plugins_loaded', 'ldcl_load_textdomain');
+
+
 
 /**
  * Creates the ldcl_serials table in the WordPress database.
@@ -49,7 +64,7 @@ function ldcl_create_serials_table() {
     $sql = "CREATE TABLE $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         serial_title varchar(255) NOT NULL,
-        serial varchar(20) NOT NULL,
+        serial varchar(16) NOT NULL,
         course_or_lesson_id mediumint(9) NOT NULL,
         validity_date date NOT NULL,
         used tinyint(1) DEFAULT 0 NOT NULL,
@@ -70,7 +85,6 @@ function ldcl_create_serials_table() {
 
 function ldcl_enqueue_scripts() {
     wp_enqueue_script( 'jquery' );   
-
     // Enqueue Font Awesome CSS from CDN
     wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4', 'all' );
     // Enqueue Bootstrap CSS and JS from CDN
@@ -81,9 +95,6 @@ function ldcl_enqueue_scripts() {
     wp_enqueue_style('tablesorter-css', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css');
     wp_enqueue_script('tablesorter-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js', array('jquery'), null, true);
     wp_enqueue_script('bwip-js', 'https://cdnjs.cloudflare.com/ajax/libs/bwip-js/3.1.0/bwip-js-min.js', array(), '3.1.0', true);
-
-
-
     wp_enqueue_script('ldcl-scripts', LDCL_PLUGIN_URL . 'public/js/ldcl-scripts.js', array('jquery'), '1.0', true);
 
 }
@@ -92,9 +103,124 @@ add_action( 'plugins_loaded', 'ldcl_init' );
 
 function ldcl_enqueue_custom_styles() {
     wp_enqueue_style('ldcl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-styles.css');
+    if (is_rtl()) {
+        wp_enqueue_style('ldcl-rtl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-rtl.css', array('ldcl-styles'));
+        wp_enqueue_style('ldcl-admin-rtl', LDCL_PLUGIN_URL . 'public/css/admin-rtl.css', array('ldcl-styles', 'ldcl-rtl-styles'));
+    }
 }
-add_action('wp_enqueue_scripts', 'ldcl_enqueue_custom_styles');
+add_action('admin_enqueue_scripts', 'ldcl_enqueue_custom_styles');
 
+
+function ldcl_force_admin_rtl($classes) {
+    if (is_rtl() && isset($_GET['page']) && strpos($_GET['page'], 'ldcl-') === 0) {
+        $classes .= ' force-rtl';
+    }
+    return $classes;
+}
+add_filter('admin_body_class', 'ldcl_force_admin_rtl');
+
+/**
+ * Adds inline styles to the admin area for RTL (Right-to-Left) languages.
+ * This function checks if the current WordPress installation is using an RTL language.
+ * If it is, it outputs inline CSS styles to align the admin menu and other elements properly.
+ *
+ * @return void
+ */
+function ldcl_add_inline_styles() {
+    if (is_rtl()) {
+        echo '<style>
+            /* Add any additional RTL styles here */
+                /* ldcl-rtl.css */
+            .wp-admin #adminmenu {
+                text-align: right;
+
+            }
+            html{
+                text-align: right !important;
+            }
+            
+        </style>';
+    }
+}
+add_action('admin_head', 'ldcl_add_inline_styles');
+
+function ldcl_add_customizer_rtl_styles() {
+    if (is_rtl()) {
+        echo '<style id="ldcl-customizer-rtl-styles">
+            /* Force RTL styles for customizer */
+            .wp-customizer .wp-full-overlay-sidebar,
+            .wp-customizer .wp-full-overlay-sidebar-content,
+            .wp-customizer .customize-panel-back,
+            .wp-customizer .customize-section-back,
+            .wp-customizer .customize-control,
+            .wp-customizer .customize-control-title,
+            .wp-customizer .customize-control input,
+            .wp-customizer .customize-control textarea,
+            .wp-customizer .customize-control select {
+                direction: rtl !important;
+                text-align: right !important;
+            }
+            
+            .wp-customizer .customize-panel-back,
+            .wp-customizer .customize-section-back {
+                float: right !important;
+            }
+            
+            .wp-customizer .customize-controls-close {
+                left: 0 !important;
+                right: auto !important;
+            }
+
+            body.rtl #adminmenu .wp-submenu {
+                left: auto;
+                right: 160px;
+            }
+
+/* Add more specific rules as needed */
+            
+            /* Add any other specific styles here */
+
+            body, body.rtl, html{
+           text-align: right !important;
+    }
+        </style>';
+    }
+}
+add_action('customize_controls_print_styles', 'ldcl_add_customizer_rtl_styles');
+
+function ldcl_enqueue_late_customizer_rtl_styles() {
+    if (is_rtl()) {
+        wp_add_inline_style('customize-controls', '
+            /* Repeat the same styles as above */
+            .wp-customizer .wp-full-overlay-sidebar,
+            .wp-customizer .wp-full-overlay-sidebar-content,
+            .wp-customizer .customize-panel-back,
+            .wp-customizer .customize-section-back,
+            .wp-customizer .customize-control,
+            .wp-customizer .customize-control-title,
+            .wp-customizer .customize-control input,
+            .wp-customizer .customize-control textarea,
+            .wp-customizer .customize-control select {
+                direction: rtl !important;
+                text-align: right !important;
+            }
+            
+            .wp-customizer .customize-panel-back,
+            .wp-customizer .customize-section-back {
+                float: right !important;
+            }
+            
+            .wp-customizer .customize-controls-close {
+                left: 0 !important;
+                right: auto !important;
+            }
+                        body, body.rtl, html{
+           text-align: right !important;
+    }
+        ');
+    }
+}
+add_action('customize_controls_enqueue_scripts', 'ldcl_enqueue_late_customizer_rtl_styles', 20);
 
 // Create a page for serial input
 /**
@@ -104,7 +230,7 @@ add_action('wp_enqueue_scripts', 'ldcl_enqueue_custom_styles');
  * @return void
  */
 function ldcl_create_serial_page() {
-    $page_title = 'Enter Serial Code';
+    $page_title = __('Enter Serial Code', 'learndash-content-locker');
     $post_name = 'enter-serial-code';
     $page_content = '[ldcl_serial_form]';
 
@@ -150,21 +276,19 @@ function ldcl_create_serial_page() {
 function ldcl_serial_form_shortcode() {
     ob_start();
     ?>
-<form method="post" id="ldcl-serial-form">
+<form method="post" id="ldcl-serial-form" dir="rtl" style="direction:rtl" dir="rtl">
     <?php if (isset($_GET['ldcl_message'])): ?>
     <div class="ldcl-message <?php echo esc_attr($_GET['ldcl_message_type']); ?>">
         <?php echo esc_html($_GET['ldcl_message']); ?>
     </div>
     <?php endif; ?>
-    <h5>Enter The 12 Chars Serial</h5>
-    <div>
+    <h5><?php _e('Enter the 8 characters serial number', 'learndash-content-locker'); ?></h5>
+    <div dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>" style="direction:<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
         <input type="text" placeholder="xxxx" name="ldcl_serial_part1" id="ldcl_serial_part1" maxlength="4" required>
         <span>-</span>
         <input type="text" placeholder="xxxx" name="ldcl_serial_part2" id="ldcl_serial_part2" maxlength="4" required>
-        <span>-</span>
-        <input type="text" placeholder="xxxx" name="ldcl_serial_part3" id="ldcl_serial_part3" maxlength="4" required>
     </div>
-    <button type="submit">Confirm Serial</button>
+    <button type="submit"><?php _e('Confirm Serial Number', 'learndash-content-locker'); ?></button>
     <?php wp_nonce_field('ldcl_save_settings', 'ldcl_settings_nonce'); ?>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -197,11 +321,10 @@ add_shortcode('ldcl_serial_form', 'ldcl_serial_form_shortcode');
  * @return void
  */
 function ldcl_handle_serial_form_submission() {
-    if (isset($_POST['ldcl_serial_part1']) && isset($_POST['ldcl_serial_part2']) && isset($_POST['ldcl_serial_part3'])) {
+    if (isset($_POST['ldcl_serial_part1']) && isset($_POST['ldcl_serial_part2'])) {
         global $wpdb;
         $serial_code = sanitize_text_field($_POST['ldcl_serial_part1']) . '-' .
-                       sanitize_text_field($_POST['ldcl_serial_part2']) . '-' .
-                       sanitize_text_field($_POST['ldcl_serial_part3']);
+                       sanitize_text_field($_POST['ldcl_serial_part2']);
         $table_name = $wpdb->prefix . 'ldcl_serials';
 
         $serial = $wpdb->get_row(
@@ -233,11 +356,11 @@ function ldcl_handle_serial_form_submission() {
                 wp_redirect(get_permalink($serial->course_or_lesson_id));
                 exit;
             } else {
-                $message = 'تاريخ إنتهاء الكود قد مر بالفعل ، تواصل مع السكرتارية لشراء كود جديد';
+                $message = _e('Serial number is outdated', 'learndash-content-locker');
                 $message_type = 'error';
             }
         } else {
-            $message = 'الكود المدخل غير صحيح او مستخدم من قبل ، تواصل مع السكرتارية لشراء كود جديد';
+            $message = _e('Invalid or already used serial code', 'learndash-content-locker');
             $message_type = 'error';
         }
 

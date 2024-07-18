@@ -1,8 +1,18 @@
+<?php
+require_once LDCL_PLUGIN_DIR . 'includes/class-ldcl-serial.php';
+require_once LDCL_PLUGIN_DIR . 'admin/class-ldcl-admin.php';
+require_once LDCL_PLUGIN_DIR . 'public/class-ldcl-public.php';
+
+wp_localize_script('your-script-handle', 'ldclTranslations', array(
+    'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker')
+    ));
+?>
 <div id="barcodeModal" class="modal fade">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Serial Barcode</h5>
+                <h5 class="modal-title">
+                    <?php _e('Serial Barcode', 'learndash-content-locker'); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,13 +24,17 @@
             <div class="modal-buttons">
                 <hr>
 
-                <button id="downloadBarcodeBtn" class="custombtn">Download barcode</button>
-                <button id="copySerialTextBtn" class="custombtn">Copy to clipboard</button>
+                <button id="downloadBarcodeBtn" class="custombtn">
+                    <?php _e('Download barcode', 'learndash-content-locker'); ?></button>
+                <button id="copySerialTextBtn" class="custombtn">
+                    <?php _e('Copy to clipboard', 'learndash-content-locker'); ?></button>
             </div>
         </div>
     </div>
 
 </div>
+
+
 
 <script>
 (function($) {
@@ -58,7 +72,7 @@
                 // Create tooltip
                 var tooltip = document.createElement('div');
                 tooltip.classList.add('tooltip');
-                tooltip.textContent = 'Serial copied to clipboard!';
+                tooltip.textContent = ldclTranslations.serialCopied;
                 document.body.appendChild(tooltip);
 
                 // Remove the tooltip after 3 seconds

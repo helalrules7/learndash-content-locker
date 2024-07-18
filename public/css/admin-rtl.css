@@ -1,0 +1,124 @@
+body.rtl #wpcontent,
+body.rtl #wpbody-content,
+body.rtl .wrap,
+body.rtl #wpbody-content * {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl #adminmenu,
+body.rtl #adminmenuback,
+body.rtl #adminmenuwrap {
+    right: 0 !important;
+    left: auto !important;
+}
+
+body.rtl #adminmenu {
+    right: 160px !important;
+    left: auto !important;
+}
+
+body.rtl #wpcontent,
+body.rtl #wpfooter {
+    margin-right: 160px !important;
+    margin-left: 0 !important;
+}
+
+body.rtl .wrap {
+    margin: 10px 0 0 20px !important;
+}
+
+/* Force RTL for form elements */
+body.rtl input[type="text"],
+body.rtl input[type="password"],
+body.rtl input[type="checkbox"],
+body.rtl input[type="color"],
+body.rtl input[type="date"],
+body.rtl input[type="datetime"],
+body.rtl input[type="datetime-local"],
+body.rtl input[type="email"],
+body.rtl input[type="month"],
+body.rtl input[type="number"],
+body.rtl input[type="radio"],
+body.rtl input[type="tel"],
+body.rtl input[type="time"],
+body.rtl input[type="url"],
+body.rtl input[type="week"],
+body.rtl input[type="search"],
+body.rtl select,
+body.rtl textarea {
+    direction: rtl !important;
+}
+
+body.force-rtl #wpcontent,
+body.force-rtl #wpbody-content,
+body.force-rtl .wrap {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin #wpcontent,
+body.rtl.wp-admin #wpbody-content,
+body.rtl.wp-admin .wrap,
+body.rtl.wp-admin #wpbody-content * {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin #adminmenu,
+body.rtl.wp-admin #adminmenu,
+body.rtl.wp-admin #adminmenuback,
+body.rtl.wp-admin #adminmenuwrap {
+    right: 0 !important;
+    left: auto !important;
+}
+
+body.rtl.wp-admin #adminmenu {
+    right: 160px !important;
+    left: auto !important;
+}
+
+body.rtl.wp-admin #wpcontent,
+body.rtl.wp-admin #wpfooter {
+    margin-right: 160px !important;
+    margin-left: 0 !important;
+}
+
+body.rtl.wp-admin .wrap {
+    margin: 10px 20px 0 0 !important;
+}
+
+/* Force RTL for form elements */
+body.rtl.wp-admin input[type="text"],
+body.rtl.wp-admin input[type="password"],
+body.rtl.wp-admin input[type="checkbox"],
+body.rtl.wp-admin input[type="color"],
+body.rtl.wp-admin input[type="date"],
+body.rtl.wp-admin input[type="datetime"],
+body.rtl.wp-admin input[type="datetime-local"],
+body.rtl.wp-admin input[type="email"],
+body.rtl.wp-admin input[type="month"],
+body.rtl.wp-admin input[type="number"],
+body.rtl.wp-admin input[type="radio"],
+body.rtl.wp-admin input[type="tel"],
+body.rtl.wp-admin input[type="time"],
+body.rtl.wp-admin input[type="url"],
+body.rtl.wp-admin input[type="week"],
+body.rtl.wp-admin input[type="search"],
+body.rtl.wp-admin select,
+body.rtl.wp-admin textarea {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+body.rtl.wp-admin .force-rtl #wpcontent,
+body.rtl.wp-admin .force-rtl #wpbody-content,
+body.rtl.wp-admin .force-rtl .wrap {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.rtlready {
+    direction: rtl !important;
+    text-align: right !important;
+}

@@ -10,7 +10,7 @@ class LDCL_Serial {
  * @return string A unique 12-character serial number.
  */
     public static function generate_serial() {
-        return strtoupper( wp_generate_password( 12, false, false ) );
+        return strtoupper( wp_generate_password( 8, false, false ) );
     }
 
     public static function validate_serial( $serial ) {

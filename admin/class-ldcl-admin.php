@@ -4,7 +4,6 @@ require_once ABSPATH . 'wp-admin/includes/admin.php';
 require_once ABSPATH . 'wp-includes/pluggable.php';
 require_once plugin_dir_path(__FILE__) . '../vendor/autoload.php';
 
-
 class LDCL_Admin
 {
 /**
@@ -14,6 +13,9 @@ public function __construct()
 {
     // Add admin menu page
     add_action('admin_menu', array($this, 'add_admin_pages'));
+
+    // Enqueue admin scripts and styles
+    add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
 
     // Enqueue admin scripts and styles
     add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -50,8 +52,8 @@ public function __construct()
 public function add_admin_pages()
 {
     add_menu_page(
-        'LDCL Serials', // Page title
-        'LDCL Serials', // Menu title
+        __('LearnDash Serial Codes', 'learndash-content-locker'),
+        __('LearnDash Serial Codes', 'learndash-content-locker'),
         'manage_options', // Capability required
         'ldcl-serials', // Menu slug
         array($this, 'serials_table_page'), // Function to call when rendering the page
@@ -60,8 +62,8 @@ public function add_admin_pages()
 
     add_submenu_page(
         'ldcl-serials', // Parent menu slug
-        'Create Course Serial', // Page title
-        'Create Course Serial', // Menu title
+        __('Create New Serial', 'learndash-content-locker'),
+        __('Create New Serial', 'learndash-content-locker'),
         'manage_options', // Capability required
         'ldcl-create-course-serial', // Menu slug
         array($this, 'create_course_serial_page') // Function to call when rendering the page
@@ -69,13 +71,34 @@ public function add_admin_pages()
 
     add_submenu_page(
         'ldcl-serials', // Parent menu slug
-        'Buy Me Coffe !', // Page title
-        'Buy Me Coffe !', // Menu title
+        __('Support the developer!', 'learndash-content-locker'),
+        __('Support the developer!', 'learndash-content-locker'),
         'manage_options', // Capability required
         'ldcl-contribute', // Menu slug
         array($this, 'contribute_page') // Function to call when rendering the page
     );
 }
+
+/**
+     * Enqueues admin scripts and styles.
+     *
+     * @param string $hook The current admin page hook.
+     *
+     * @return void
+     */
+    public function enqueue_admin_assets($hook) {
+        if (strpos($hook, 'ldcl-serials') !== false) {
+            wp_enqueue_style('ldcl-admin-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-styles.css');
+            if (is_rtl()) {
+                wp_enqueue_style('ldcl-admin-rtl-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-rtl.css', array('ldcl-admin-styles'));
+                wp_enqueue_style('ldcl-admin-rtl', LDCL_PLUGIN_URL . 'public/css/admin-rtl.css', array('ldcl-admin-styles', 'ldcl-admin-rtl-styles'));
+            }
+            wp_enqueue_script('ldcl-admin-js', LDCL_PLUGIN_URL . 'assets/js/ldcl-admin.js', array('jquery'), null, true);
+            wp_localize_script('ldcl-admin-js', 'ldcl_admin', array(
+                'nonce' => wp_create_nonce('export_serials_nonce')
+            ));
+        }
+    }
 
     public function enqueue_admin_scripts()
     {
@@ -116,8 +139,15 @@ public function ldcl_export_serials_to_excel() {
     $sheet = $spreadsheet->getActiveSheet();
 
     // Set headers for the Excel file
-    $headers = ['Serial', 'Title', 'Course', 'Validity', 'Used', 'Used By', 'Created At'];
-    $column = 'A';
+    $headers = [
+        __('Code', 'learndash-content-locker'),
+        __('Code Title', 'learndash-content-locker'),
+        __('Associated Course', 'learndash-content-locker'),
+        __('Validity', 'learndash-content-locker'),
+        __('Used', 'learndash-content-locker'),
+        __('User', 'learndash-content-locker'),
+        __('Creation Date', 'learndash-content-locker')
+    ];    $column = 'A';
     foreach ($headers as $header) {
         $sheet->setCellValue($column . '1', $header);
         $column++;
@@ -201,21 +231,41 @@ public function ldcl_export_serials_to_excel() {
  */
 function ldcl_delete_serial_callback() {
     global $wpdb;
-
+    
     // Check nonce for security
-    check_ajax_referer( 'ldcl_delete_serial_nonce', 'nonce' );
-
-    // Retrieve the serial ID from the POST data
-    $serial_id = isset( $_POST['serial_id'] ) ? intval( $_POST['serial_id'] ) : 0;
-
-    // Delete the serial from the database
+    check_ajax_referer('ldcl_delete_serial_nonce', 'nonce');
+    
+    $serial_id = isset($_POST['serial_id']) ? intval($_POST['serial_id']) : 0;
+    
+    // Get the serial details
     $table_name = $wpdb->prefix . 'ldcl_serials';
-    $wpdb->delete( $table_name, array( 'id' => $serial_id ) );
-
-    // Return a success response
-    wp_send_json_success( 'Serial deleted successfully' );
+    $serial = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $serial_id));
+    
+    if ($serial) {
+        // Remove user access to the course
+        $course_id = $serial->course_or_lesson_id;
+        $user_id = $serial->used_by_user_id;
+        
+        if ($user_id && $course_id) {
+            // Remove the user from the course
+            ld_update_course_access($user_id, $course_id, false);
+            
+            // Delete user meta related to course access
+            delete_user_meta($user_id, 'course_' . $course_id . '_access_from');
+        }
+        
+        // Delete the serial from the database
+        $wpdb->delete($table_name, array('id' => $serial_id));
+        
+        // Return a response (optional)
+        wp_send_json_success('Serial deleted successfully and user access revoked');
+    } else {
+        wp_send_json_error('Serial not found');
+    }
+    
     wp_die();
 }
+
 
 /**
  * Updates a serial's data in the database.
