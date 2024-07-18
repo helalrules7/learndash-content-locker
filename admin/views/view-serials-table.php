@@ -60,9 +60,11 @@ require_once ABSPATH . 'wp-load.php';
             if ($used_by_user_id) {
                 $used_by_user = get_userdata($used_by_user_id);
                 if ($used_by_user) {
-                    $used_by_user_link = '<a href="' . esc_url(get_edit_user_link($used_by_user_id)) . '">' . esc_html($used_by_user->user_login) . '</a>';
+                    $user_edit_link = get_edit_user_link($used_by_user_id);
+                    $used_by_user_link = '<a href="' . esc_url($user_edit_link . '#learndash_user_courses-' . $used_by_user_id) . '">' . esc_html($used_by_user->user_login) . '</a>';
                 }
             }
+            
                         // Convert the created_at to a date format
                         $created_at_date = date('Y-m-d', strtotime($serial->created_at));
 
