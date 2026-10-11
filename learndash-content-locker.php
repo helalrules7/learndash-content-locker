@@ -110,7 +110,7 @@ function ldcl_enqueue_custom_styles() {
 add_action('wp_enqueue_scripts', 'ldcl_enqueue_custom_styles');
 
 function ldcl_enqueue_admin_styles() {
-    wp_enqueue_style('ldcl-admin-styles', LDCL_PLUGIN_URL . 'public/css/admin-styles.css', array(), '1.0.0');
+    wp_enqueue_style('ldcl-admin-styles', LDCL_PLUGIN_URL . 'public/css/ldcl-admin.css', array(), '1.0.0');
     if (is_rtl()) {
         wp_enqueue_style('ldcl-admin-rtl-styles', LDCL_PLUGIN_URL . 'public/css/admin-rtl.css', array('ldcl-admin-styles'), '1.0.0');
     }

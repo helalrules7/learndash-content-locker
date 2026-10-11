@@ -139,12 +139,23 @@ public function get_delete_nonce() {
         ));
 
 
-        //Copy serial to clipboard
-        wp_enqueue_script('ldcl-copy-serial', LDCL_PLUGIN_URL . 'public/js/copy-serial.js', array('jquery'), '1.0', true);
-        wp_localize_script('ldcl-copy-serial', 'ldclTranslations', array(
-            'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker')
-        ));
-        
+    // Copy serial to clipboard
+    wp_enqueue_script('ldcl-copy-serial', LDCL_PLUGIN_URL . 'public/js/copy-serial.js', array('jquery'), '1.0', true);
+    wp_localize_script('ldcl-copy-serial', 'ldclTranslations', array(
+'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker'),
+'serialReverseCopied' => __('Reversed Serial copied to clipboard!', 'learndash-content-locker')
+
+    ));
+
+    // Reverse copy serial to clipboard
+    wp_enqueue_script('ldcl-reverse-copy', LDCL_PLUGIN_URL . 'public/js/reverse-copy.js', array('jquery'), '1.0', true);
+    wp_localize_script('ldcl-reverse-copy', 'ldclTranslations', array(
+'serialCopied' => __('Serial copied to clipboard!', 'learndash-content-locker'),
+'serialReverseCopied' => __('Reversed Serial copied to clipboard!', 'learndash-content-locker')
+
+    ));
+    
+
 
         //Edit Modal and functionality
         wp_enqueue_script('ldcl-edit-serial', LDCL_PLUGIN_URL . 'public/js/edit-serial.js', array('jquery'), '1.0', true);

@@ -42,38 +42,41 @@ function generateRandomSerialAndUpdateInput() {
     document.getElementById('generated_serial').value = generatedSerial;
 }
 
-document.getElementById('copy_serial').addEventListener('click', function () {
-    // Copy the generated serial to the clipboard
-    var generatedSerial = document.getElementById('generated_serial').value;
-    if (generatedSerial === '') {
-        // Display the tooltip
-        var danger_tooltip = document.createElement('div');
-        danger_tooltip.classList.add('danger_tooltip');
-        danger_tooltip.textContent = 'Click on Generate Serial First !';
-        document.body.appendChild(danger_tooltip);
+document.addEventListener('DOMContentLoaded', function () {
+    var copySerialButton = document.getElementById('copy_serial');
+
+    if (copySerialButton) {
+        copySerialButton.addEventListener('click', function () {
+            // Copy the generated serial to the clipboard
+            var generatedSerial = document.getElementById('generated_serial');
+
+            if (!generatedSerial || generatedSerial.value === '') {
+                // Display the tooltip
+                showTooltip('Click on Generate Serial First !', 'danger_tooltip');
+                return; // Exit the function if no serial is generated
+            }
+
+            generatedSerial.select();
+            document.execCommand("copy");
+
+            // Display the tooltip
+            showTooltip('Serial copied to clipboard!', 'tooltip');
+        });
+    } else {
+        console.warn("Element with ID 'copy_serial' not found.");
+    }
+
+    function showTooltip(message, className) {
+        var tooltip = document.createElement('div');
+        tooltip.classList.add(className);
+        tooltip.textContent = message;
+        document.body.appendChild(tooltip);
 
         // Remove the tooltip after 3 seconds
         setTimeout(function () {
-            danger_tooltip.remove();
+            tooltip.remove();
         }, 3000);
-
-        return; // Exit the function if no serial is generated
     }
-
-    var copyText = document.getElementById('generated_serial');
-    copyText.select();
-    document.execCommand("copy");
-    // Display the tooltip
-    var tooltip = document.createElement('div');
-    tooltip.classList.add('tooltip');
-    tooltip.textContent = 'Serial copied to clipboard!';
-    document.body.appendChild(tooltip);
-
-    // Remove the tooltip after 3 seconds
-    setTimeout(function () {
-        tooltip.remove();
-    }, 3000);
-
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -134,6 +137,7 @@ jQuery(document).ready(function ($) {
         });
     });
 });
+
 
 
 

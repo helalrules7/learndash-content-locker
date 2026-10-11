@@ -35,13 +35,14 @@ require_once ABSPATH . 'wp-load.php';
         <table id="serialsTable" class="widefat fixed rtlready" cellspacing="0">
             <thead>
                 <tr>
-                    <th id="serial"><?php _e('Serial', 'learndash-content-locker'); ?></th>
-                    <th id="title"><?php _e('Title', 'learndash-content-locker'); ?></th>
-                    <th id="course_or_lesson"><?php _e('Course', 'learndash-content-locker'); ?></th>
-                    <th id="validity"><?php _e('Validity', 'learndash-content-locker'); ?></th>
-                    <th id="used"><?php _e('Is Used?', 'learndash-content-locker'); ?></th>
-                    <th id="usedby"><?php _e('Username', 'learndash-content-locker'); ?></th>
-                    <th id="created_at"><?php _e('Created', 'learndash-content-locker'); ?></th>
+                    <th id="serial" style="width: 10%;"><?php _e('Serial', 'learndash-content-locker'); ?></th>
+                    <th id="title" style="width: 10%;"><?php _e('Title', 'learndash-content-locker'); ?></th>
+                    <th id="course_or_lesson" style="width: 25%;"><?php _e('Course', 'learndash-content-locker'); ?>
+                    </th>
+                    <th id="validity" style="width: 10%;"><?php _e('Validity', 'learndash-content-locker'); ?></th>
+                    <th id="used" style="width: 10%;"><?php _e('Is Used?', 'learndash-content-locker'); ?></th>
+                    <th id="usedby" style="width: 10%;"><?php _e('Username', 'learndash-content-locker'); ?></th>
+                    <th id="created_at" style="width: 10%;"><?php _e('Created', 'learndash-content-locker'); ?></th>
                     <th>#</th>
                 </tr>
             </thead>
@@ -91,6 +92,11 @@ require_once ABSPATH . 'wp-load.php';
                         </button>
                         <button type="button" class="custombtn copy-serial-btn"
                             title="<?php echo esc_attr__('Copy', 'learndash-content-locker'); ?>"
+                            data-serial-id="<?php echo esc_attr($serial->id); ?>">
+                            <i class="fa fa-copy"></i>
+                        </button>
+                        <button type="button" class="custombtn reverse-copy-serial-btn"
+                            title="<?php echo esc_attr__('Reverse Copy', 'learndash-content-locker'); ?>"
                             data-serial-id="<?php echo esc_attr($serial->id); ?>">
                             <i class="fa fa-copy"></i>
                         </button>

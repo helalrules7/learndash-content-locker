@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LearnDash Content Locker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 09:36+0000\n"
+"POT-Creation-Date: 2024-08-25 14:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.6; wp-6.6\n"
+"X-Loco-Version: 2.6.6; wp-6.6.1\n"
 "X-Domain: learndash-content-locker"
 
 #: admin/views/view-contribute.php:14
@@ -24,11 +24,11 @@ msgstr ""
 msgid " Export to excel"
 msgstr ""
 
-#: admin/views/view-contribute.php:20
+#: admin/views/view-contribute.php:22
 msgid " GitHub"
 msgstr ""
 
-#: admin/views/view-contribute.php:17
+#: admin/views/view-contribute.php:18
 msgid " Visit My Website"
 msgstr ""
 
@@ -46,11 +46,11 @@ msgstr ""
 msgid "Are you sure you want to delete serial "
 msgstr ""
 
-#: admin/class-ldcl-admin.php:145
+#: admin/class-ldcl-admin.php:207
 msgid "Associated Course"
 msgstr ""
 
-#: admin/views/view-serials-table.php:91
+#: admin/views/view-serials-table.php:104
 msgid "Barcode"
 msgstr ""
 
@@ -58,15 +58,15 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:35
+#: admin/views/view-create-serial-course.php:32
 msgid "Clipboard copy"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:143
+#: admin/class-ldcl-admin.php:205
 msgid "Code"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:144
+#: admin/class-ldcl-admin.php:206
 msgid "Code Title"
 msgstr ""
 
@@ -74,41 +74,37 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: learndash-content-locker.php:291
+#: learndash-content-locker.php:311
 msgid "Confirm Serial Number"
 msgstr ""
 
-#: admin/views/view-serials-table.php:86
+#: admin/views/view-serials-table.php:94
 msgid "Copy"
 msgstr ""
 
-#: admin/views/view-barcode-modal.php:30
-msgid "Copy to clipboard"
-msgstr ""
-
-#: admin/views/view-serials-table.php:35
+#: admin/views/view-serials-table.php:40
 msgid "Course"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:13
+#: admin/views/view-create-serial-course.php:8
 msgid "Create a new serial code"
 msgstr ""
 
 #. Parent menu slug
-#: admin/class-ldcl-admin.php:65 admin/class-ldcl-admin.php:66
+#: admin/class-ldcl-admin.php:68 admin/class-ldcl-admin.php:69
 #: admin/views/view-serials-table.php:23
 msgid "Create New Serial"
 msgstr ""
 
-#: admin/views/view-serials-table.php:39
+#: admin/views/view-serials-table.php:45
 msgid "Created"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:149
+#: admin/class-ldcl-admin.php:211
 msgid "Creation Date"
 msgstr ""
 
-#: admin/views/view-serials-table.php:81
+#: admin/views/view-serials-table.php:89
 msgid "Delete"
 msgstr ""
 
@@ -116,27 +112,31 @@ msgstr ""
 msgid "Delete Serial"
 msgstr ""
 
-#: admin/views/view-barcode-modal.php:28
+#: admin/views/view-barcode-modal.php:23
 msgid "Download barcode"
 msgstr ""
 
-#: admin/views/view-serials-table.php:76
+#: admin/views/view-serials-table.php:84
 msgid "Edit"
 msgstr ""
 
-#: admin/views/view-edit-modal.php:13
+#: admin/views/view-edit-modal.php:14
 msgid "Edit Serial"
 msgstr ""
 
-#: learndash-content-locker.php:233
+#: learndash-content-locker.php:246
 msgid "Enter Serial Code"
 msgstr ""
 
-#: learndash-content-locker.php:285
+#: learndash-content-locker.php:305
 msgid "Enter the 8 characters serial number"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:33
+#: admin/class-ldcl-admin.php:328
+msgid "Failed to delete serial"
+msgstr ""
+
+#: admin/views/view-create-serial-course.php:30
 msgid "Generate Code"
 msgstr ""
 
@@ -148,23 +148,19 @@ msgstr ""
 msgid "If you find this plugin helpful, please consider supporting me:"
 msgstr ""
 
-#: learndash-content-locker.php:363
+#: learndash-content-locker.php:383
 msgid "Invalid or already used serial code"
 msgstr ""
 
-#: admin/views/view-serials-table.php:37
+#: admin/views/view-serials-table.php:43
 msgid "Is Used?"
-msgstr ""
-
-#: admin/views/view-create-serial-course.php:10
-msgid "LearnDash Serial Locker"
 msgstr ""
 
 #. Name of the plugin
 msgid "LearnDash Content Locker"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:55 admin/class-ldcl-admin.php:56
+#: admin/class-ldcl-admin.php:58 admin/class-ldcl-admin.php:59
 msgid "LearnDash Serial Codes"
 msgstr ""
 
@@ -172,59 +168,80 @@ msgstr ""
 msgid "Lock LearnDash courses with a serial number."
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:18
+#: admin/views/view-create-serial-course.php:12
 msgid "New serial code created successfully!"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:47
+#: admin/views/view-create-serial-course.php:44
 msgid "No Courses found"
 msgstr ""
 
-#: admin/views/view-serials-table.php:102
+#: admin/views/view-serials-table.php:115
 msgid "No serials found"
 msgstr ""
 
-#: admin/views/view-edit-modal.php:36 admin/views/view-edit-modal.php:42
+#: admin/views/view-edit-modal.php:37 admin/views/view-edit-modal.php:43
 msgid "Related Course"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:39
+#: admin/views/view-create-serial-course.php:36
 msgid "Related Course:"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:58
+#: admin/views/view-serials-table.php:99
+msgid "Reverse Copy"
+msgstr ""
+
+#: admin/class-ldcl-admin.php:146 admin/class-ldcl-admin.php:154
+msgid "Reversed Serial copied to clipboard!"
+msgstr ""
+
+#: admin/views/view-create-serial-course.php:55
 msgid "Save Code"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:41
+#: admin/views/view-serials-table.php:32
+msgid "Search serials..."
+msgstr ""
+
+#: admin/views/view-create-serial-course.php:38
 msgid "Select Course"
 msgstr ""
 
-#: admin/views/view-edit-modal.php:27 admin/views/view-serials-table.php:33
+#: admin/views/view-serials-table.php:38 admin/views/view-edit-modal.php:28
 msgid "Serial"
 msgstr ""
 
-#: admin/views/view-barcode-modal.php:15
+#: admin/views/view-barcode-modal.php:11
 msgid "Serial Barcode"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:28
+#: admin/views/view-create-serial-course.php:25
 msgid "Serial Code"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:25
+#: admin/views/view-create-serial-course.php:22
 msgid "Serial Code Title"
 msgstr ""
 
-#: admin/views/view-barcode-modal.php:7
+#: admin/class-ldcl-admin.php:116 admin/class-ldcl-admin.php:145
+#: admin/class-ldcl-admin.php:153
 msgid "Serial copied to clipboard!"
 msgstr ""
 
-#: learndash-content-locker.php:359
+#: admin/class-ldcl-admin.php:326
+msgid "Serial deleted successfully and user access revoked"
+msgstr ""
+
+#: admin/class-ldcl-admin.php:331
+msgid "Serial not found"
+msgstr ""
+
+#: learndash-content-locker.php:379
 msgid "Serial number is outdated"
 msgstr ""
 
-#: admin/views/view-edit-modal.php:22
+#: admin/views/view-edit-modal.php:23
 msgid "Serial Title"
 msgstr ""
 
@@ -233,40 +250,40 @@ msgid "Support the developer"
 msgstr ""
 
 #. Parent menu slug
-#: admin/class-ldcl-admin.php:74 admin/class-ldcl-admin.php:75
+#: admin/class-ldcl-admin.php:77 admin/class-ldcl-admin.php:78
 msgid "Support the developer!"
 msgstr ""
 
-#: admin/views/view-serials-table.php:34
+#: admin/views/view-serials-table.php:39
 msgid "Title"
 msgstr ""
 
-#: admin/views/view-edit-modal.php:47
+#: admin/views/view-edit-modal.php:48
 msgid "Update"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:27
-#: admin/views/view-edit-modal.php:24
+#: admin/views/view-create-serial-course.php:24
+#: admin/views/view-edit-modal.php:25
 msgid "Use username or phone for easy search"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:147
+#: admin/class-ldcl-admin.php:209
 msgid "Used"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:148
+#: admin/class-ldcl-admin.php:210
 msgid "User"
 msgstr ""
 
-#: admin/views/view-serials-table.php:38
+#: admin/views/view-serials-table.php:44
 msgid "Username"
 msgstr ""
 
-#: admin/class-ldcl-admin.php:146 admin/views/view-serials-table.php:36
+#: admin/class-ldcl-admin.php:208 admin/views/view-serials-table.php:42
 msgid "Validity"
 msgstr ""
 
-#: admin/views/view-create-serial-course.php:50
-#: admin/views/view-edit-modal.php:31
+#: admin/views/view-create-serial-course.php:47
+#: admin/views/view-edit-modal.php:32
 msgid "Validity Date"
 msgstr ""

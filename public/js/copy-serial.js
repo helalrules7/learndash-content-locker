@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 var tooltip = document.createElement('div');
                 tooltip.classList.add('tooltip');
-                tooltip.textContent = ldclTranslations.serialCopied;
+                tooltip.textContent = (window.ldclTranslations && window.ldclTranslations.serialCopied) || 'Serial copied to clipboard!';
                 document.body.appendChild(tooltip);
 
                 setTimeout(function () {

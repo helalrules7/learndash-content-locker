@@ -320,6 +320,14 @@ body.rtl.wp-admin .ldcl-admin-page form#ldcl-serial-form button {
     color: yellowgreen
 }
 
+.reverse-copy-serial-btn {
+    color: #e74782
+}
+
+.reverse-copy-serial-btn:hover {
+    color: #571a42
+}
+
 .barcode-serial-btn:hover {
     color: darkslategrey;
 }
